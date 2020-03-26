@@ -2,12 +2,13 @@
 import pygsheets
 from sheets_access_secret import *
 
-gc = pygsheets.authorize(service_file=CREDENTIALS)
-
 def run_sheets_scrape():
     # print(gc.spreadsheet_titles())
     #
     # return
+
+    # authorize right before it's needed!
+    gc = pygsheets.authorize(service_file=CREDENTIALS)
 
     spreadsheet = gc.open_by_key(SHEET_KEY)
     worksheet1 = spreadsheet.sheet1
