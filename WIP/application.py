@@ -2,6 +2,8 @@ import logging
 import logging.handlers
 
 from wsgiref.simple_server import make_server
+from wsgi_static_middleware import StaticMiddleware
+import os
 
 # https://jinja.palletsprojects.com/en/2.11.x/api/#basics
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -54,6 +56,10 @@ def application(environ, start_response):
         response = None
         if path == '/home':
             response = render_template('welcome2.html', {})
+        elif path == '/index':
+            # https://stackoverflow.com/questions/25034812/use-a-css-stylesheet-on-a-jinja2-template/25034903
+            # this (^) allows us to avoid passing in any parameters to bootstrap
+            response = render_template('index.html', {'parent':'/static/'})
         else:
             response = render_template('welcome.html', {})
     status = '200 OK'
@@ -62,6 +68,11 @@ def application(environ, start_response):
     start_response(status, headers)
     return [response]
 
+# https://pypi.org/project/wsgi-static-middleware/
+# this is what allows us to serve static resources (like CSS and JS)
+BASE_DIR = os.path.dirname(__name__)
+STATIC_DIRS = [os.path.join(BASE_DIR, 'static')]
+application = StaticMiddleware(application, static_root='static', static_dirs=STATIC_DIRS)
 
 if __name__ == '__main__':
     httpd = make_server('', 8000, application)
