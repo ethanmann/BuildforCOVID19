@@ -9,6 +9,12 @@
 3. Upload to AWS
 
 # TODOS:
-1. Refactor the HTML into a templates folder (with a styles folder for CSS)
-2. Add framework for HTML (static)
+1. Refactor the HTML into a templates folder (with a styles folder for CSS) - DONE
+2. Add framework for HTML (static) - DONE
 3. Build out the backend (figure out how it can modified safely)
+
+# Backend:
+1. Google form (for input): should take in address, ZIP code, website, other info
+2. Google sheet (linked to form, sends email notifications upon submission) - column for Verified?
+3. Querying our site => querying the google sheet via AppScript (query on business type, location)
+4. Add ZIP code api for location preferences?
