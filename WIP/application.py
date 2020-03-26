@@ -58,14 +58,14 @@ def application(environ, start_response):
         response = None
         if path == '/home':
             response = render_template('welcome2.html', {})
-            drive.run_sheets_scrape() # TESTING ONLY #
         elif path == '/index':
-            # https://stackoverflow.com/questions/25034812/use-a-css-stylesheet-on-a-jinja2-template/25034903
-            # this (^) allows us to avoid passing in any parameters to bootstrap
+            # passing in the static folder which contains the static resources
             response = render_template('index.html', {'parent':'/static/'})
         elif path == '/form':
+            # embeds the Google form
             response = render_template('form.html', {})
         elif path == '/results':
+            # passing in the sheets data (eventually will have more params)
             response = render_template('results.html', {'data': drive.run_sheets_scrape()})
         else:
             response = render_template('welcome.html', {})
