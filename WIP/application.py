@@ -2,6 +2,7 @@ import logging
 import logging.handlers
 
 import sheets_access as drive
+from google_form import GOOGLE_FORM_URL
 
 from wsgiref.simple_server import make_server
 from wsgi_static_middleware import StaticMiddleware
@@ -44,31 +45,38 @@ def application(environ, start_response):
     path    = environ['PATH_INFO']
     method  = environ['REQUEST_METHOD']
     if method == 'POST':
+        response = ''
         try:
-            if path == '/':
-                request_body_size = int(environ['CONTENT_LENGTH'])
-                request_body = environ['wsgi.input'].read(request_body_size).decode()
-                logger.info("Received message: %s" % request_body)
-            elif path == '/scheduled':
-                logger.info("Received task %s scheduled at %s", environ['HTTP_X_AWS_SQSD_TASKNAME'], environ['HTTP_X_AWS_SQSD_SCHEDULED_AT'])
+            # if path == '/':
+            #     request_body_size = int(environ['CONTENT_LENGTH'])
+            #     request_body = environ['wsgi.input'].read(request_body_size).decode()
+            #     logger.info("Received message: %s" % request_body)
+            # elif path == '/scheduled':
+            #     logger.info("Received task %s scheduled at %s", environ['HTTP_X_AWS_SQSD_TASKNAME'], environ['HTTP_X_AWS_SQSD_SCHEDULED_AT'])
+            if path == '/' or '/index':
+                # this is eventually how we will process the search bar:
+                # for now, we just link to the results page (without any param)
+                # passing in the sheets data (eventually will have more params)
+                print('should be returning results now!')
+                response = render_template('results.html',
+                                           {'data': drive.run_sheets_scrape(),
+                                            'parent':'/static/',
+                                            'form':GOOGLE_FORM_URL})
+
         except (TypeError, ValueError):
             logger.warning('Error retrieving request body for async work.')
-        response = ''
     else:
         response = None
-        if path == '/home':
-            response = render_template('welcome2.html', {})
-        elif path == '/index':
-            # passing in the static folder which contains the static resources
-            response = render_template('index.html', {'parent':'/static/'})
-        elif path == '/form':
-            # embeds the Google form
-            response = render_template('form.html', {})
-        elif path == '/results':
-            # passing in the sheets data (eventually will have more params)
-            response = render_template('results.html', {'data': drive.run_sheets_scrape()})
+        if path == '/admin':
+            response = render_template('admin.html', {'parent':'/static/',
+                                                        'form':GOOGLE_FORM_URL})
+        elif path == '/about':
+            response = render_template('about.html', {'parent':'/static/',
+                                                        'form':GOOGLE_FORM_URL})
         else:
-            response = render_template('welcome.html', {})
+            # passing in the static folder which contains the static resources
+            response = render_template('index.html', {'parent':'/static/',
+                                                      'form':GOOGLE_FORM_URL})
     status = '200 OK'
     headers = [('Content-type', 'text/html')]
 
