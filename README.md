@@ -1,6 +1,6 @@
 # To run the WIP app:
-1. You make need to create the folder "opt/python/log"
-2. run "python2 application.py"
+1. You may need to create the folder "opt/python/log" (outside of the repo)
+2. Run "python2 application.py"
 
 # To deploy on AWS:
 1. Add any new dependencies to "requirements.txt"
