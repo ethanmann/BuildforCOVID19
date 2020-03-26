@@ -29,11 +29,12 @@ handler.setFormatter(formatter)
 # add Handler to Logger
 logger.addHandler(handler)
 
-# produce a template for the welcome page
-welcome_template = env.get_template('welcome.html')
-
-# render the template using a dictionary of substitutions
-welcome = str(welcome_template.render({}))
+# function to render HTML templates
+def render_template(filename, substitutions):
+    # produce a template for the filename
+    template = env.get_template(filename)
+    # render the template using a dictionary of substitutions
+    return str(template.render(substitutions))
 
 def application(environ, start_response):
     path    = environ['PATH_INFO']
@@ -50,7 +51,11 @@ def application(environ, start_response):
             logger.warning('Error retrieving request body for async work.')
         response = ''
     else:
-        response = welcome
+        response = None
+        if path == '/home':
+            response = render_template('welcome2.html', {})
+        else:
+            response = render_template('welcome.html', {})
     status = '200 OK'
     headers = [('Content-type', 'text/html')]
 
