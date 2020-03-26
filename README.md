@@ -14,6 +14,7 @@
 3. Build out the backend (figure out how it can modified safely)
 
 # Backend:
+0. Get private key added for Google access - added (.gitignore for the key)
 1. Google form (for input): should take in address, ZIP code, website, other info
 2. Google sheet (linked to form, sends email notifications upon submission) - column for Verified?
 3. Querying our site => querying the google sheet via AppScript (query on business type, location)

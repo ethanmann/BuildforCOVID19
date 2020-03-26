@@ -1,6 +1,8 @@
 import logging
 import logging.handlers
 
+import sheets_access as drive
+
 from wsgiref.simple_server import make_server
 from wsgi_static_middleware import StaticMiddleware
 import os
@@ -56,10 +58,15 @@ def application(environ, start_response):
         response = None
         if path == '/home':
             response = render_template('welcome2.html', {})
+            drive.run_sheets_scrape() # TESTING ONLY #
         elif path == '/index':
             # https://stackoverflow.com/questions/25034812/use-a-css-stylesheet-on-a-jinja2-template/25034903
             # this (^) allows us to avoid passing in any parameters to bootstrap
             response = render_template('index.html', {'parent':'/static/'})
+        elif path == '/form':
+            response = render_template('form.html', {})
+        elif path == '/results':
+            response = render_template('results.html', {'data': drive.run_sheets_scrape()})
         else:
             response = render_template('welcome.html', {})
     status = '200 OK'
