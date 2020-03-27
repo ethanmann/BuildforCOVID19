@@ -1,3 +1,4 @@
 jinja2>=2.6
 wsgi_static_middleware>=0.1.2
+cgi
 pygsheets>=2.0.0

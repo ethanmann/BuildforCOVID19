@@ -112,163 +112,41 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
       </div>
     </div>
 
-    <ul>
-      {% for item in data %}
-          <li>{{ item }}</li>
-      {% endfor %}
-    </ul>
+
+      <!-- {% for item in data %}
+        <h3> {{item.Name}} </h3>
+        <ul>
+          <li> Email: {{ item.Email }}</li>
+          <li> Phone: {{ item.Phone }}</li>
+          <li> Type: {{ item.Type }}</li>
+          <li> Address: {{ item.Street }}, {{ item.City }}, {{ item.State }} {{ item.ZIP }}</li>
+          <li> Site: {{ item.Site }} </li>
+        </ul>
+      {% endfor %} -->
 
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
 
+            {% for item in data %}
             <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url('images/img_2.jpg')">
-                <span class="category">Restaurants</span>
-              </a>
-
-              <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">Jones Grill &amp; Restaurants</a></h3>
-                <p>Don St, Brooklyn, New York</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(492 Reviews)</span>
-                </p>
-
-
-              </div>
-
-            </div>
-
-            <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url('images/img_1.jpg')">
-                <span class="category">Hotels</span>
-              </a>
-
-              <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">Luxe Hotel</a></h3>
-                <p>West Orange, New York</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(492 Reviews)</span>
-                </p>
-
-
-              </div>
-
-            </div>
-
-            <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url('images/img_3.jpg')">
-                <span class="category">Events</span>
-              </a>
-
-              <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">Live Band</a></h3>
-                <p>Don St, Brooklyn, New York</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(22 Reviews)</span>
-                </p>
-
-
-              </div>
-
-            </div>
-
-
-            <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url('images/img_4.jpg')">
-                <span class="category">Others</span>
-              </a>
-
-              <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">Gourmett Coffees</a></h3>
-                <p>Don St, Brooklyn, New York</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(79 Reviews)</span>
-                </p>
-
-
-              </div>
-
-            </div>
-
-            <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url('images/img_5.jpg')">
-                <span class="category">Spa</span>
-              </a>
-
-              <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">La Italia Spa</a></h3>
-                <p>Italy, Europe</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(48 Reviews)</span>
-                </p>
-
-
-              </div>
-
-            </div>
-
-            <div class="d-block d-md-flex listing-horizontal">
-
               <a href="#" class="img d-block" style="background-image: url('images/img_6.jpg')">
-                <span class="category">Stores</span>
+                <span class="category">{{item.Type.split(",")[0]}}</span>
               </a>
-
               <div class="lh-content">
                 <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">Super Market Malls</a></h3>
-                <p>Don St, Brooklyn, New York</p>
-                <p>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-secondary"></span>
-                  <span>(433 Reviews)</span>
-                </p>
-
-
+                <h3><a href="#">{{item.Name}}</a></h3>
+                <p>{{ item.Street }}, {{ item.City }}, {{ item.State }} {{ item.ZIP }}</p>
               </div>
-
             </div>
+            {% endfor %}
 
-            <div class="col-12 mt-5 text-center">
+            {% if data_len == 0 %}
+            <h3>No results found. Try another query?</h3>
+            {% endif %}
+
+            <!-- <div class="col-12 mt-5 text-center">
               <div class="custom-pagination">
                 <span>1</span>
                 <a href="#">2</a>
@@ -276,7 +154,7 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
                 <span class="more-page">...</span>
                 <a href="#">10</a>
               </div>
-            </div>
+            </div> -->
 
           </div>
           <div class="col-lg-3 ml-auto">
@@ -285,77 +163,26 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
               <h3 class="h5 text-black mb-3">Filters</h3>
               <form action="#" method="post">
                 <div class="form-group">
-                  <input type="text" placeholder="What are you looking for?" class="form-control">
+                  <!-- select-wrap, .wrap-icon -->
+                  <div class="wrap-icon">
+                    <span class="icon icon-room"></span>
+                    <input type="text" placeholder={{city}} value={{city}} class="form-control" name="city">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" placeholder={{zip}} value={{zip}} class="form-control" name="zip">
                 </div>
                 <div class="form-group">
                   <div class="select-wrap">
                       <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
-                      <select class="form-control" name="" id="">
-                        <option value="">All Categories</option>
-                        <option value="">Appartment</option>
-                        <option value="">Restaurant</option>
-                        <option value="">Eat &amp; Drink</option>
-                        <option value="">Events</option>
-                        <option value="">Fitness</option>
-                        <option value="">Others</option>
+                      <select class="form-control" value={{type}} name="type">
+                        {% for option in options %}
+                          <option value="{{option[0]}}" {{option[1]}}>{{option[2]}}</option>
+                        {% endfor %}
                       </select>
                     </div>
                 </div>
-                <div class="form-group">
-                  <!-- select-wrap, .wrap-icon -->
-                  <div class="wrap-icon">
-                    <span class="icon icon-room"></span>
-                    <input type="text" placeholder="Location" class="form-control">
-                  </div>
-                </div>
-              </form>
-            </div>
-
-            <div class="mb-5">
-              <form action="#" method="post">
-                <div class="form-group">
-                  <p>Radius around selected destination</p>
-                </div>
-                <div class="form-group">
-                  <input type="range" min="0" max="100" value="20" data-rangeslider>
-                </div>
-              </form>
-            </div>
-
-            <div class="mb-5">
-              <form action="#" method="post">
-                <div class="form-group">
-                  <p>Category 'Restaurant' is selected</p>
-                  <p>More filters</p>
-                </div>
-                <div class="form-group">
-                  <ul class="list-unstyled">
-                    <li>
-                      <label for="option1">
-                        <input type="checkbox" id="option1">
-                        Coffee
-                      </label>
-                    </li>
-                    <li>
-                      <label for="option2">
-                        <input type="checkbox" id="option2">
-                        Vegetarian
-                      </label>
-                    </li>
-                    <li>
-                      <label for="option3">
-                        <input type="checkbox" id="option3">
-                        Vegan Foods
-                      </label>
-                    </li>
-                    <li>
-                      <label for="option4">
-                        <input type="checkbox" id="option4">
-                        Sea Foods
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                <input type="submit" class="btn text-white btn-primary" value="Search">
               </form>
             </div>
 
@@ -364,145 +191,27 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
         </div>
       </div>
     </div>
-
-    <div class="site-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center border-primary">
-            <h2 class="font-weight-light text-primary">Popular Categories</h2>
-            <p class="color-black-opacity-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          </div>
-        </div>
-
-        <div class="row align-items-stretch">
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-hotel"></span></span>
-              <span class="caption mb-2 d-block">Hotels</span>
-              <span class="number">4,89</span>
-            </a>
-          </div>
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-microphone"></span></span>
-              <span class="caption mb-2 d-block">Events</span>
-              <span class="number">482</span>
-            </a>
-          </div>
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-flower"></span></span>
-              <span class="caption mb-2 d-block">Spa</span>
-              <span class="number">194</span>
-            </a>
-          </div>
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-restaurant"></span></span>
-              <span class="caption mb-2 d-block">Stores</span>
-              <span class="number">1,472</span>
-            </a>
-          </div>
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-cutlery"></span></span>
-              <span class="caption mb-2 d-block">Restaurants</span>
-              <span class="number">439</span>
-            </a>
-          </div>
-          <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
-            <a href="#" class="popular-category h-100">
-              <span class="icon mb-3"><span class="flaticon-bike"></span></span>
-              <span class="caption mb-2 d-block">Other</span>
-              <span class="number">692</span>
-            </a>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-
 
     <div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
-            <h2 class="mb-3 mt-0 text-white">Let's get started. Create your account</h2>
-            <p class="mb-0 text-white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+            <h2 class="mb-3 mt-0 text-white">Join our network of businesses.</h2>
+            <p class="mb-0 text-white">Submit our form to list your store on our platform.</p>
           </div>
           <div class="col-lg-4">
-            <p class="mb-0"><a href="signup.html" class="btn btn-outline-white text-white btn-md px-5 font-weight-bold btn-md-block">Sign Up</a></p>
+            <p class="mb-0"><a href="{{form}}" target="_blank" class="btn btn-outline-white text-white btn-md px-5 font-weight-bold btn-md-block">Sign Up</a></p>
           </div>
         </div>
       </div>
     </div>
 
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
-          <div class="col-12 text-md-center text-left">
-            <p>
-              <!-- Link back to Free-Template.co can't be removed. Template is licensed under CC BY 3.0. -->
-          &copy; 2019 <strong class="text-black">Browse</strong> Free Template. All Rights Reserved. <br> Design by <a href="https://free-template.co/" target="_blank" class="text-black">Free-Template.co</a>
-          </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+    <div class="col-12 text-md-center text-left">
+        <p>
+          <!-- Link back to Free-Template.co can't be removed. Template is licensed under CC BY 3.0. -->
+          <br> &copy; 2019 <strong class="text-black">Browse</strong> Free Template. All Rights Reserved. Design by <a href="https://free-template.co/" target="_blank" class="text-black">Free-Template.co</a>
+        </p>
+    </div>
 
   <script src="{{parent}}js/jquery-3.3.1.min.js"></script>
   <script src="{{parent}}js/jquery-migrate-3.0.1.min.js"></script>

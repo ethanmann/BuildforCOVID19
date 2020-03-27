@@ -110,26 +110,22 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
               <form method="post">
                 <div class="row align-items-center">
                   <div class="col-lg-12 col-xl-4 no-sm-border border-right">
-                    <input type="text" class="form-control" placeholder="What city are you from?">
+                    <input type="text" class="form-control" placeholder="What city are you from?" name="city">
                   </div>
                   <div class="col-lg-12 col-xl-3 no-sm-border border-right">
                     <div class="wrap-icon">
                       <span class="icon icon-room"></span>
-                      <input type="text" class="form-control" placeholder="ZIP Code">
+                      <input type="text" class="form-control" placeholder="ZIP Code" name="zip">
                     </div>
 
                   </div>
                   <div class="col-lg-12 col-xl-3">
                     <div class="select-wrap">
                       <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
-                      <select class="form-control" name="" id="">
-                        <option value="">Type of Business</option>
-                        <option value="">Hotels</option>
-                        <option value="">Restaurant</option>
-                        <option value="">Eat &amp; Drink</option>
-                        <option value="">Events</option>
-                        <option value="">Fitness</option>
-                        <option value="">Others</option>
+                      <select class="form-control" name="type">
+                        {% for option in options %}
+                          <option value="{{option[0]}}" {{option[1]}}>{{option[2]}}</option>
+                        {% endfor %}
                       </select>
                     </div>
                   </div>
@@ -187,9 +183,9 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
   <script src="{{parent}}js/typed.js"></script>
             <script>
             var typed = new Typed('.typed-words', {
-            strings: [" Grocery Stores"," Coffee Shops"," Restaurants", " Bakeries", " [TBD]"],
+            strings: [" Grocery Stores"," Coffee Shops"," Restaurants", " Bakeries", " Bookstores", " Clothing Shops", " Salons"," Gyms"],
             typeSpeed: 80,
-            backSpeed: 80,
+            backSpeed: 90,
             backDelay: 4000,
             startDelay: 1000,
             loop: true,
