@@ -31,10 +31,12 @@ def get_row_record(row, worksheet=None):
     record['Row'] = row
     return record
 
-def run_sheets_scrape(zip, city, type, site_type_map_to_form_types):
+def run_sheets_scrape(zip, city, f_type, site_type_map_to_form_types):
     # old debugging
     # print(gc.spreadsheet_titles())
     # return
+
+    # print("starting: f_type is ", f_type)
 
     worksheet = get_sheet()
 
@@ -45,10 +47,12 @@ def run_sheets_scrape(zip, city, type, site_type_map_to_form_types):
     # makes sure everything is set to be a string with numericise_data as False
     records = worksheet.get_all_records(numericise_data=False)
 
-    print(records)
+    print("acquired all records")
+
+    # print(records)
     if DOUBLE_HEADER:
         records = records[1:]
-    print(records)
+    # print(records)
     new_records = []
 
     if DOUBLE_HEADER:
@@ -65,10 +69,10 @@ def run_sheets_scrape(zip, city, type, site_type_map_to_form_types):
         if str(record['City']).lower() != str(city).lower():
             continue
 
-        # check if the site type matches any of the form types
+        # check if the site type f_type matches any of the form types
         match = False
         record_types = str(record['Type']).lower()
-        for match_type in site_type_map_to_form_types[type]:
+        for match_type in site_type_map_to_form_types[f_type]:
             if match_type.lower() in record_types:
                 match = True
                 break
@@ -82,5 +86,7 @@ def run_sheets_scrape(zip, city, type, site_type_map_to_form_types):
             new_records.append(record)
         else:
             new_records.insert(0, record)
+
+    print("finished checking all records, # results is:", len(new_records))
 
     return new_records

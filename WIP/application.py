@@ -100,8 +100,8 @@ def application(environ, start_response):
     }
     def get_selected_options(selected_type):
         selected_options = []
-        for type in form_type:
-            tuple = (type, "selected" if type == selected_type else "", form_type[type])
+        for f_type in form_type:
+            tuple = (f_type, "selected" if f_type == selected_type else "", form_type[f_type])
             selected_options.append(tuple)
         print(selected_options)
         return selected_options
@@ -120,13 +120,31 @@ def application(environ, start_response):
                 # for now, we just link to the results page (without any param)
                 # passing in the sheets data (eventually will have more params)
                 print('should be returning results now!')
+
+
+                # byte decoding
+                # https://stackoverflow.com/questions/41918836/how-do-i-get-rid-of-the-b-prefix-in-a-string-in-python/41918864
+                def decode(object):
+                    if type(object) == type(b'123'):
+                        return object.decode('utf-8')
+                    if type(object) == type([]):
+                        return [decode(o) for o in object]
+                    return object
+                new_d = {}
+                for key in d:
+                    val = d[key]
+                    new_d[decode(key)] = decode(val)
+                d = new_d
                 print(d)
+
                 zip = d.get('zip',['91126'])[0]
                 # this makes sure they dont type "City, State"
                 city = (d.get('city',['Pasadena'])[0]).split(',')[0]
-                type = d['type'][0]
-                # type = d.get('type',['all'])
-                drive_data = drive.run_sheets_scrape(zip, city, type, site_type_map_to_form_types)
+                # type = d['type'][0]
+                f_type = d.get('type',['all'])[0]
+                print("making request to drive in 3...2...1...")
+                drive_data = drive.run_sheets_scrape(zip, city, f_type, site_type_map_to_form_types)
+                print("about to send response after post request")
                 response = render_template('results.html',
                                            {'data': drive_data,
                                             'data_len': len(drive_data),
@@ -134,8 +152,8 @@ def application(environ, start_response):
                                             'form':GOOGLE_FORM_URL,
                                             'zip':zip,
                                             'city':city,
-                                            'type':type,
-                                            'options':get_selected_options(type)})
+                                            'type':f_type,
+                                            'options':get_selected_options(f_type)})
 
         except (TypeError, ValueError):
             logger.warning('Error retrieving request body for async work.')
