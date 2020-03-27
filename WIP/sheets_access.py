@@ -18,6 +18,11 @@ def get_row_record(row, worksheet=None):
     header_arr = worksheet.get_row(1, include_tailing_empty=False)
     row_arr = worksheet.get_row(row, include_tailing_empty=False)
 
+    # in case some question was not answered at the end of the survey
+    # and the row was cut off early...
+    while len(row_arr) < len(header_arr):
+        row_arr.append('N/A')
+
     record = {}
     for i in range(len(header_arr)):
         key = header_arr[i]

@@ -103,6 +103,9 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
                 <h1>Search Results</h1>
+                {% if data_len > 0 %}
+                <p>Click on the Business Names to learn more.</p>
+                {% endif %}
               </div>
             </div>
 
@@ -131,13 +134,15 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
 
             {% for item in data %}
             <div class="d-block d-md-flex listing-horizontal">
-              <a href="#" class="img d-block" style="background-image: url('images/img_6.jpg')">
-                <span class="category">{{item.Type.split(",")[0]}}</span>
-              </a>
               <div class="lh-content">
-                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#">{{item.Name}}</a></h3>
+                <!-- <a href="#" class="bookmark"><span class="icon-heart"></span></a> -->
+                <h3><a href="/business/{{ item.Row }}">{{item.Name}}</a></h3>
                 <p>{{ item.Street }}, {{ item.City }}, {{ item.State }} {{ item.ZIP }}</p>
+                <p><a href="{{ item.Site }}" target="_blank">{{ item.Site }}</a> </p>
+                <p>{{ item.Phone }} | {{ item.Email }}</p>
+              </div>
+              <div class="img d-block" style="background-image: url('images/img_6.jpg')">
+                <span class="category">{{item.Type.split(",")[0]}}</span>
               </div>
             </div>
             {% endfor %}

@@ -149,11 +149,12 @@ def application(environ, start_response):
                                                         'form':GOOGLE_FORM_URL})
         elif '/business/' in path:
             row = path.split('business/')[-1]
-            record = drive.get_row_record(int(row))
-            print(record)
+            # I use item for record since it is the standard in results.html
+            item = drive.get_row_record(int(row))
+            print(item)
             response = render_template('listing.html', {'parent':'/static/',
-                                                        'form':GOOGLE_FORM_URL})
-                                                        # 'record':record})
+                                                        'form':GOOGLE_FORM_URL,
+                                                        'item':item})
         else:
             # passing in the static folder which contains the static resources
             response = render_template('index.html', {'parent':'/static/',
