@@ -18,7 +18,7 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Free Website Template by Free-Template.co</title>
+    <title>Locality.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -67,7 +67,7 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
         <div class="row align-items-center">
 
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="/index" class="text-white h2 mb-0">Browse</a></h1>
+            <h1 class="mb-0 site-logo"><a href="/index" class="text-white h2 mb-0">Locality.</a></h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
@@ -159,6 +159,15 @@ RSS Feed: https://feeds.feedburner.com/Free-templateco
           <div class="col-lg-3 ml-auto">
 
             <div class="mb-5">
+
+              <h3 class="h5 text-black mb-3">Show Your Support</h3>
+              <!-- https://www.tutorialspoint.com/html/html_email_links.htm -->
+              <!-- similar tutorial on Stackoverflow for Twitter -->
+              <p><a href="http://www.twitter.com/share?text=Join me in supporting local businesses like {{ item.Name }}. Check out their website: {{ item.Site }} and their Locality listing:" target="_blank">Share on Twitter</a></p>
+              <p><a href="mailto: {{ item.Email }}?&subject= Local support (referred from Locality).&body=I saw your listing on Locality and would like to offer ..." target="_blank">Contact {{ item.Name }}</a></p>
+
+              <br></br>
+
               <h3 class="h5 text-black mb-3">Social Media Links</h3>
 
               {% if "." in item.FB %}
